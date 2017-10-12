@@ -140,7 +140,7 @@ public class Account {
 	 * A method that allows a customer to deposit money into this account
 	 * @param amount A double that represents a deposit amount
 	 */
-	public synchronized void debosit(double amount){
+	public synchronized void debosit(double amount){ //Method Synchronization
 		
 		// Waste some time doing fake computations
 		// do not remove or modify any of the following 3 statements
@@ -162,7 +162,7 @@ public class Account {
 	 * A method that allows a customer to withdraw money from this account
 	 * @param amount A double that represents a withdrawal amount
 	 */
-	public synchronized void withdraw(double amount){
+	public synchronized void withdraw(double amount){  ///Method Synchronization
 
 		// Waste some time doing fake computations
 		// do not remove or modify any of the following 3 statements
