@@ -1,4 +1,4 @@
-package task3A;
+package src.task3A;
 
 
 

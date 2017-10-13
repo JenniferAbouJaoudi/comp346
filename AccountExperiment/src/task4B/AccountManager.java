@@ -1,4 +1,4 @@
-package task4B;
+package src.task4B;
 
 /**
  * Class AccountManager

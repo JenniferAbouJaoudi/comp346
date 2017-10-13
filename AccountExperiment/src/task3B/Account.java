@@ -1,4 +1,4 @@
-package task3B;
+package src.task3B;
 
 /**
  * Class Account
