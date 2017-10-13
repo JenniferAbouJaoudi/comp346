@@ -1,4 +1,5 @@
-package defaultpackage;
+package src.task1;
+
 /**
  * Class Account
  * Implements one customized customer account for many of our own threads.

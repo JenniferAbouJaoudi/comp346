@@ -1,6 +1,6 @@
-package defaultpackage;
+package src.task1;
 
-
+import src.task1.Account;
 
 /**
  * Class Depositor

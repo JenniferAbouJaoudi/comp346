@@ -1,6 +1,4 @@
-package defaultpackage;
-
-
+package src.task1;
 
 /**
  * Class AccountManager
@@ -17,7 +15,7 @@ public class AccountManager {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
-		Account [] account = new Account[10];
+		Account[] account = new Account[10];
 		Depositor [] deposit = new Depositor[10];
 		Withdrawer [] withdraw = new Withdrawer[10];
 		
