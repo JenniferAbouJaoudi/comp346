@@ -1,0 +1,9 @@
+TASK 5
+Block synchronization vs Method Synchronization
+
+Block synchronization is more efficient because it allows one to focus specifically
+on one part of the the code (critical section), which allows better throughput.
+While in method synchronization, it looks the current instantiated object for the
+entire duration of the method. When really all we need is only part of the code
+to be synchronized. In the end, block level is more efficient, by potentially producing
+more throughput from a given section of the code.
