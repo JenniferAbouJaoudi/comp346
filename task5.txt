@@ -1,3 +1,39 @@
+TASK 1
+In the implementation of the code presentend in task 1, the threads are qualified as
+non-safe. This means that a parameter should not be accessed concurrently by more than
+1 thread. In this case however, we have both the deposit and the withdraw thread accessing
+the same array. 
+This causes automicity issues because in a non-atomic operation, a thread performing a write will
+create a thorn-write in memory. If another thread reads the value of the memory then it will receive
+unintended garbage. 
+We notice the the automicity is non-atomic due to the fact that each withdraw and deposit operation happen
+999999 times.
+In the given code the non-atomicity causes bugs where the deposite and withdraw operations overlap on the
+same memory location. Because threads operate concurently, we notice that the deposit operation
+will begin and doesn't terminate before the withdraw operation starts. Because of such
+an event, we can conclude that bogus information if left in the memory. Running the code 
+confirms this theory.
+Memory corruption is something that occurs in operating systems which stems from the principal
+of thread-safety. Using uninitialized memory, none-owned memory, overloading the memory allocation,
+or faulty heap memory management all lead to this cause. This is a phenomenon often seen in applications
+linked to C or C++ where the user has control over memory allocation often referred to as MALLOC.
+
+https://en.wikipedia.org/wiki/Memory_corruption
+
+TASK 2
+On the creation of a new thread, the Operating System takes over and schedules the work to happen at a later time.
+Therefore there is no way to determine in which order threads will execute. 
+During the application's runtime, the application runs on what is called the main thread. From this thread more
+child threads may spawn. Those child threads may spawn other threads and so on. While the threads are alive,
+they may perform their operations concurrently in their own environment where they are allocated
+resources. Finally joining a thread means that a child thread rejoins it's parent thread in order to
+continue the sequential code. If a parent thread ends it's operation before the child thread 
+ends it's concurrent operation, then the parent thread is suspended until the child can join. Once the
+join operation executes we can declare the thread as being killed or terminated. 
+
+After playing with the start order of the threads, the concurrency has not been preserved. Every runtime
+yields a slightly different result in which the output is not desired. 
+
 TASK 5
 Block synchronization vs Method Synchronization
 
