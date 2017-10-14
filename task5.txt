@@ -11,12 +11,13 @@ We notice the the automicity is non-atomic due to the fact that each withdraw an
 In the given code the non-atomicity causes bugs where the deposite and withdraw operations overlap on the
 same memory location. Because threads operate concurently, we notice that the deposit operation
 will begin and doesn't terminate before the withdraw operation starts. Because of such
-an event, we can conclude that bogus information if left in the memory. Running the code 
+an event, we can conclude that bogus information is left in the memory. Running the code 
 confirms this theory.
 Memory corruption is something that occurs in operating systems which stems from the principal
 of thread-safety. Using uninitialized memory, none-owned memory, overloading the memory allocation,
 or faulty heap memory management all lead to this cause. This is a phenomenon often seen in applications
-linked to C or C++ where the user has control over memory allocation often referred to as MALLOC.
+linked to C or C++ where the user has control over memory allocation often referred to as MALLOC where a miss use
+of this feature may crash programs.
 
 https://en.wikipedia.org/wiki/Memory_corruption
 
