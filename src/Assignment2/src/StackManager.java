@@ -1,3 +1,5 @@
+import CharStackExceptions.CharStackEmptyException;
+
 // Source code for stack manager:
 
 public class StackManager
@@ -62,7 +64,7 @@ public class StackManager
             System.out.println("Final value of top = " + stack.getTop() + ".");
             System.out.println("Final value of stack top = " + stack.pick() + ".");
             System.out.println("Final value of stack top-1 = " + stack.getAt(stack.getTop() - 1) + ".");
-            System.out.println("Stack access count = " + stack.getAccessCounter());
+           // System.out.println("Stack access count = " + stack.getAccessCounter());
         }
         catch(InterruptedException e)
         {

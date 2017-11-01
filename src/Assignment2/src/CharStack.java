@@ -16,7 +16,8 @@ class CharStack
     */
     private static int iSize = DEFAULT_SIZE;
     private static int iTop = 3; // stack[0:9] with four defined values
-    //private static char aCharStack[] = new char[]  {�a�, �b�, �c�, �d�, �$�, �$�,�$�,�$�,�$�,�$�};
+    private static char aCharStack[] = new char[]  {'a','b', 'c', 'd', '$', '$','$','$','$','$'};
+
     // Default constructor
     public CharStack() {
             // Just do nothing
@@ -27,13 +28,13 @@ class CharStack
         if (piSize < MIN_SIZE || piSize > MAX_SIZE)
             throw new CharStackInvalidSizeException(piSize);
         if (piSize != DEFAULT_SIZE) {
-            //this.aCharStack = new char[piSize];
+            this.aCharStack = new char[piSize];
             // Fill in with letters of the alphabet and keep
             // 6 free blocks
             for(int i = 0; i < piSize - 6; i++)
-                //this.aCharStack[i] = (char)(�a� + i);
+                this.aCharStack[i] = (char)('a' + i);
             for (int i = 1; i <= 6; i++)
-                //this.aCharStack[piSize - i] = �$�;
+                this.aCharStack[piSize - i] = '$';
             this.iTop = piSize - 7;
             this.iSize = piSize;
         }
@@ -70,7 +71,7 @@ class CharStack
         if (iTop == -1)
             throw new CharStackEmptyException();
         char cChar = aCharStack[iTop];
-        //aCharStack[iTop--] = �$�; // Leave prev. value undefined
+        //aCharStack[iTop--] = '$'; // Leave prev. value undefined
         return cChar;
     }
 
