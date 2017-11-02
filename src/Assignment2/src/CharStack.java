@@ -33,8 +33,9 @@ class CharStack
             // 6 free blocks
             for(int i = 0; i < piSize - 6; i++)
                 this.aCharStack[i] = (char)('a' + i);
-            for (int i = 1; i <= 6; i++)
+            for (int i = 1; i <= 6; i++){ 
                 this.aCharStack[piSize - i] = '$';
+            }
             this.iTop = piSize - 7;
             this.iSize = piSize;
         }

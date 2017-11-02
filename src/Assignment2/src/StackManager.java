@@ -9,13 +9,18 @@ public class StackManager
     private static final int NUM_ACQREL = 4; // Number of Producer/Consumer threads
     private static final int NUM_PROBERS = 1; // Number of threads dumping stack
     private static int iThreadSteps = 3; // Number of steps they take
-    // Semaphore declarations. Insert your code in the following:
-    //...
-    //...
+    
+    // initialization of the Semaphores
+    public static Semaphore semCon;
+    public static Semaphore semPro;
+
+    
     // The main()
     public static void main(String[] argv)
-    {
-        // Some initial stats...
+    {   
+    	semPro = new Semaphore(1);
+    	semCon = new Semaphore(0);
+    	
         try
         {
             System.out.println("Main thread starts executing.");
@@ -44,11 +49,11 @@ public class StackManager
                   /*
                  * start executing
                   */
-        ab1.start();
         rb1.start();
-        ab2.start();
+        ab1.start();
         rb2.start();
-        csp.start();
+        ab2.start();
+        //csp.start();
                  /*
                   * Wait by here for all forked threads to die
                  */
@@ -87,32 +92,38 @@ public class StackManager
         private char copy; // A copy of a block returned by pop()
         public void run()
         {
+        	//LOCK ACCESS WHEN PROCESS IS ACCESSING CRITICAL SECTION
+        	semCon.P();
             System.out.println ("Consumer thread [TID=" + this.iTID + "] starts executing.");
             for (int i = 0; i < StackManager.iThreadSteps; i++)  {
-                // Insert your code in the following:
-                // ...
-                // ...
+            	//access critical section
                 System.out.println("Consumer thread [TID=" + this.iTID + "] pops character =" + this.copy);
-            }
-            System.out.println ("Consumer thread [TID=" + this.iTID + "] terminates.");
+            } 
+            //SIGNAL THE NEXT PROCESS THAT IT CAN ACCESS CRITICAL SECTION
+            System.out.println ("Consumer thread [TID=" + this.iTID + "] terminates."); 
+            semPro.V();
+
+
         }
     } // class Consumer
     /*
    * Inner class Producer
     */
-    static class Producer extends BaseThread
+   static class Producer extends BaseThread
     {
         private char block; // block to be returned
         public void run()
-        {
-            System.out.println ("Producer thread [TID=" + this.iTID + "] starts executing.");
+        {	//LOCK ACCESS WHEN PROCESS IS ACCESSING CRITICAL SECTION
+        	semPro.P();
+            System.out.println ("Producer thread [TID=" + this.iTID + "] starts executing."); 
+ 
             for (int i = 0; i < StackManager.iThreadSteps; i++)  {
-                // Insert your code in the following:
-                // ...
-                //...
                 System.out.println("Producer thread [TID=" + this.iTID + "] pushes character =" + this.block);
-            }
+            } 
+            //SIGNAL THE NEXT PROCESS THAT IT CAN ACCESS CRITICAL SECTION
             System.out.println("Producer thread [TID=" + this.iTID + "] terminates.");
+            semCon.V();
+
         }
     } // class Producer
     /*
@@ -121,15 +132,7 @@ public class StackManager
     static class CharStackProber extends BaseThread
     {
         public void run()
-        {
-            System.out.println("CharStackProber thread [TID=" + this.iTID + "] starts executing.");
-            for (int i = 0; i < 2 * StackManager.iThreadSteps; i++)
-            {
-                // Insert your code in the following. Note that the stack state must be
-                // printed in the required format.
-                // ...
-                // ...
-            }
+        { 
         }
-    } // class CharStackProber
+    } // class CharStackProber 
 } // class StackManager
