@@ -1,6 +1,8 @@
 // Source code for character stack:
 
 // Our own exceptions
+import java.util.Vector;
+
 import CharStackExceptions.*;
 
 class CharStack
@@ -10,14 +12,14 @@ class CharStack
     */
     public static final int MIN_SIZE = 7; // Minimum stack size
     public static final int MAX_SIZE = 32; // # of letters in the English alphabet + 6
-    public static final int DEFAULT_SIZE = 10; // Default stack size
+    public static final int DEFAULT_SIZE = 10; // Default stack size 
     /*
     * Class variables
     */
     private static int iSize = DEFAULT_SIZE;
     private static int iTop = 3; // stack[0:9] with four defined values
-    private static char aCharStack[] = new char[]  {'a','b', 'c', 'd', '$', '$','$','$','$','$'};
-
+    private static char aCharStack[] = new char[]  {'a','b', 'c', 'd', '$', '$','$','$','$','$'}; 
+    
     // Default constructor
     public CharStack() {
             // Just do nothing
@@ -72,7 +74,7 @@ class CharStack
         if (iTop == -1)
             throw new CharStackEmptyException();
         char cChar = aCharStack[iTop];
-        //aCharStack[iTop--] = '$'; // Leave prev. value undefined
+        aCharStack[iTop--] = '$'; // Leave prev. value undefined
         return cChar;
     }
 

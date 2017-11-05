@@ -1,47 +1,48 @@
-import java.util.Queue;
-
+ 
 // Source code for semaphore class:
 
 class Semaphore
 {
 
-    private int value;
-    private int count;
+    private int value; 
     
     public Semaphore()
     {
-        this.value = 0;
+        this.value = 0; 
     }
     public Semaphore(int value)
     {	
-        this.value = value;
+        this.value = value; 
     }
     public synchronized void Wait()
-    {  
-    /*number of threads/process waiting can be obtained using the absoluate value of the integer */
-       this.value--;
-    	
+    {   
+       this.value--;  
+
        if(this.value < 0)
         { 
             try
             {
+            	//Uncomment to see how many threads/process are waiting
+            	this.getWaitList();
                 wait();
+                this.value--;
             }
             catch(InterruptedException e)
             {
                 System.out.println ("Semaphore::Wait() - caught InterruptedException: " + e.getMessage() );
                 e.printStackTrace();
             }
-         	System.out.println("IM ACCESSING CRITICAL SECTION");
-        }
+         }
+    }
+    public void getWaitList(){
+    	System.out.println("Number of waiting threads/prcess :" + Math.abs(this.value));	
     }
     public synchronized void Signal()
-    { 
-         ++this.value;
+    {     	
+         ++this.value;  
         if(this.value <= 0){
         	notify();
         }
-    	System.out.println("WHO'S NEXT");
     }
     public synchronized void P()
     {

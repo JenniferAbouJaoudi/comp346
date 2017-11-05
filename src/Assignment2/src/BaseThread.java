@@ -10,7 +10,6 @@ class BaseThread extends Thread
     {
         this.iTID = iNextTID;
         iNextTID++;
-        System.out.println(this.iTID);
     }
     public BaseThread(int piTID)
     {
