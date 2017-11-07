@@ -6,44 +6,42 @@ class Semaphore
 
     private int value; 
     
-    public Semaphore()
-    {
+    public Semaphore() {
         this.value = 0; 
     }
-    public Semaphore(int value)
-    {	
-        this.value = value; 
+
+    public Semaphore(int value) {
+        this.value = value;
     }
-    public synchronized void Wait()
-    {   
+
+    public synchronized void Wait(){
        this.value--;  
 
-       if(this.value < 0)
-        { 
-            try
-            {
+       if(this.value < 0) {
+            try {
             	//Uncomment to see how many threads/process are waiting
             	this.getWaitList();
                 wait();
                 this.value--;
             }
-            catch(InterruptedException e)
-            {
+            catch(InterruptedException e) {
                 System.out.println ("Semaphore::Wait() - caught InterruptedException: " + e.getMessage() );
                 e.printStackTrace();
             }
          }
     }
+
     public void getWaitList(){
-    	System.out.println("Number of waiting threads/prcess :" + Math.abs(this.value));	
+        System.out.println("Number of waiting threads/prcess :" + Math.abs(this.value));
     }
-    public synchronized void Signal()
-    {     	
-         ++this.value;  
+
+    public synchronized void Signal() {
+        ++this.value;
         if(this.value <= 0){
         	notify();
         }
     }
+
     public synchronized void P()
     {
         this.Wait();

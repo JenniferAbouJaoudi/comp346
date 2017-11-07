@@ -31,7 +31,6 @@ public class StackManager
 			//index for charArray
 	    	topPosition = stack.getTop();
 		} catch (CharStackInvalidSizeException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
     	
@@ -115,6 +114,7 @@ public class StackManager
         	semConsumer.P(); 
         	//LOCK ACCESS WHEN PROCESS IS ACCESSING CRITICAL SECTION
             System.out.println ("Consumer thread [TID=" + this.iTID + "] starts executing.");
+            Log.getInstance().log("Consumer thread [TID=" + this.iTID + "] starts executing.");
             for (int i = 0; i < StackManager.iThreadSteps; i++)  { 
             	//access critical section
                 try {
@@ -124,18 +124,18 @@ public class StackManager
 					//Pop value that is consumed
 					stack.pop();  
 				} catch (CharStackEmptyException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} catch (CharStackInvalidAceessException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}finally{
-	                System.out.println("Consumer thread [TID=" + this.iTID + "] pops character =" + this.copy);   
-				}
+	                System.out.println("Consumer thread [TID=" + this.iTID + "] pops character =" + this.copy);
+                    Log.getInstance().log("Consumer thread [TID=" + this.iTID + "] pops character =" + this.copy);
+                }
              }  
             semProducer.V(); 
             //SIGNAL THE NEXT PROCESS THAT IT CAN ACCESS CRITICAL SECTION
-            System.out.println ("Consumer thread [TID=" + this.iTID + "] terminates."); 
+            System.out.println ("Consumer thread [TID=" + this.iTID + "] terminates.");
+            Log.getInstance().log("Consumer thread [TID=" + this.iTID + "] terminates.");
           
         }
     } // class Consumer
@@ -148,12 +148,14 @@ public class StackManager
         public void run()
         {	//LOCK ACCESS WHEN PROCESS IS ACCESSING CRITICAL SECTION
         	semProducer.P();
-            System.out.println ("Producer thread [TID=" + this.iTID + "] starts executing."); 
+            System.out.println ("Producer thread [TID=" + this.iTID + "] starts executing.");
+            Log.getInstance().log("Producer thread [TID=" + this.iTID + "] starts executing.");
 
             for (int i = 0; i < StackManager.iThreadSteps; i++)  {
                 try {
                 	//check the first character on the top
                 	System.out.println("Top element of the stack :" + stack.getAt(stack.getTop()));
+                	Log.getInstance().log("Top element of the stack :" + stack.getAt(stack.getTop()));
                 	//push to charStack 
 					stack.push(charArray[topPosition+1]);
 					topPosition++;
@@ -161,13 +163,12 @@ public class StackManager
 					this.block = stack.getAt(stack.getTop());   
 
 				} catch (CharStackFullException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} catch (CharStackInvalidAceessException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}finally{
-	                System.out.println("Producer thread [TID=" + this.iTID + "] pushes character =" + this.block);  
+	                System.out.println("Producer thread [TID=" + this.iTID + "] pushes character =" + this.block);
+	                Log.getInstance().log("Producer thread [TID=" + this.iTID + "] pushes character =" + this.block);
 				}
              } 
             semConsumer.V(); 
@@ -188,9 +189,9 @@ public class StackManager
 	    		System.out.print("STACK S = "); 
 	        		while(j < stack.getSize()){
 	        			try {
-							System.out.print("["+stack.getAt(j)+"]"); 
+							System.out.print("["+stack.getAt(j)+"]");
+							Log.getInstance().log("STACK S = " + "["+stack.getAt(j)+"]");
 						} catch (CharStackInvalidAceessException e) {
-							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
 	        			j++;
