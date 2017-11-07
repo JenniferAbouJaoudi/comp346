@@ -2,7 +2,7 @@ import java.io.*;
 
 public class Log {
     private static Log instance;
-    private final String filename = "Grep_i.txt";
+    private final String filename = "Output_i.txt";
     private Log(){
 
     }
