@@ -17,8 +17,9 @@ public class StackManager
     private static int topPosition=0;
     
     // initialization of the Semaphores
-    public static Semaphore semProducer;
-    public static Semaphore semConsumer;  
+    public static Semaphore sem1; 
+    public static Semaphore sem2;   
+
     
     // The main()
     public static void main(String[] argv)
@@ -34,9 +35,9 @@ public class StackManager
 			e1.printStackTrace();
 		}
     	
-    	// semaphores, the Producer semaphore has (1) cause it needs to run first
-    	semProducer = new Semaphore(1);
-    	semConsumer = new Semaphore(0); 
+    	sem1 = new Semaphore(1);  
+    	sem2 = new Semaphore(0);
+    	
     	
         try
         {
@@ -86,7 +87,7 @@ public class StackManager
             System.out.println("Final value of top = " + stack.getTop() + ".");
             System.out.println("Final value of stack top = " + stack.pick() + ".");
             System.out.println("Final value of stack top-1 = " + stack.getAt(stack.getTop() - 1) + ".");
-           // System.out.println("Stack access count = " + stack.getAccessCounter());
+            System.out.println("Stack access count = " + stack.getAccessCounter());
         }
         catch(InterruptedException e)
         {
@@ -100,7 +101,7 @@ public class StackManager
             System.out.println("Stack Trace : ");
             e.printStackTrace();
         }
-        
+       
 
     } // main()
     /*
@@ -110,35 +111,47 @@ public class StackManager
     {
         private char copy; // A copy of a block returned by pop()
         public void run()
-        {        	
-        	semConsumer.P(); 
+        {        	       
+        	sem2.P();
+        	sem1.P();
+
         	//LOCK ACCESS WHEN PROCESS IS ACCESSING CRITICAL SECTION
             System.out.println ("Consumer thread [TID=" + this.iTID + "] starts executing.");
             Log.getInstance().log("Consumer thread [TID=" + this.iTID + "] starts executing.");
-            for (int i = 0; i < StackManager.iThreadSteps; i++)  { 
+    		Log.getInstance().log("\n");
+
+            for (int i = 0; i < StackManager.iThreadSteps; i++)  {  
             	//access critical section
-                try {
+                try {  
 					this.copy = stack.getAt(stack.getTop());
 					//decrease our index for stackArray
 					topPosition--;
 					//Pop value that is consumed
 					stack.pop();  
+
+		    		Log.getInstance().log("\n");
 				} catch (CharStackEmptyException e) {
 					e.printStackTrace();
 				} catch (CharStackInvalidAceessException e) {
 					e.printStackTrace();
-				}finally{
+				}finally{ 
+
 	                System.out.println("Consumer thread [TID=" + this.iTID + "] pops character =" + this.copy);
                     Log.getInstance().log("Consumer thread [TID=" + this.iTID + "] pops character =" + this.copy);
-                }
+	        		Log.getInstance().log("\n");
+
+                    sem1.V();
+                    
              }  
-            semProducer.V(); 
             //SIGNAL THE NEXT PROCESS THAT IT CAN ACCESS CRITICAL SECTION
             System.out.println ("Consumer thread [TID=" + this.iTID + "] terminates.");
             Log.getInstance().log("Consumer thread [TID=" + this.iTID + "] terminates.");
-          
-        }
-    } // class Consumer
+    		Log.getInstance().log("\n");
+
+          	}
+          sem2.V();
+        } 
+     } // class Consumer
     /*
    * Inner class Producer
     */
@@ -146,16 +159,20 @@ public class StackManager
     {
         private char block; // block to be returned
         public void run()
-        {	//LOCK ACCESS WHEN PROCESS IS ACCESSING CRITICAL SECTION
-        	semProducer.P();
-            System.out.println ("Producer thread [TID=" + this.iTID + "] starts executing.");
+        {	
+        	sem1.P();
+        	System.out.println ("Producer thread [TID=" + this.iTID + "] starts executing.");
             Log.getInstance().log("Producer thread [TID=" + this.iTID + "] starts executing.");
+    		Log.getInstance().log("\n");
+
 
             for (int i = 0; i < StackManager.iThreadSteps; i++)  {
-                try {
+                try { 
                 	//check the first character on the top
                 	System.out.println("Top element of the stack :" + stack.getAt(stack.getTop()));
                 	Log.getInstance().log("Top element of the stack :" + stack.getAt(stack.getTop()));
+	        		Log.getInstance().log("\n");
+
                 	//push to charStack 
 					stack.push(charArray[topPosition+1]);
 					topPosition++;
@@ -169,13 +186,21 @@ public class StackManager
 				}finally{
 	                System.out.println("Producer thread [TID=" + this.iTID + "] pushes character =" + this.block);
 	                Log.getInstance().log("Producer thread [TID=" + this.iTID + "] pushes character =" + this.block);
+	        		Log.getInstance().log("\n");
+
+
 				}
-             } 
-            semConsumer.V(); 
+             }   
             //SIGNAL THE NEXT PROCESS THAT IT CAN ACCESS CRITICAL SECTION
             System.out.println("Producer thread [TID=" + this.iTID + "] terminates.");  
- 
-         }
+            Log.getInstance().log("Producer thread [TID=" + this.iTID + "] terminates.");
+    		Log.getInstance().log("\n");
+
+            sem1.V();
+
+            sem2.V();
+          } 
+
     } // class Producer
     /*
    * Inner class CharStackProber to dump stack contents
@@ -183,22 +208,27 @@ public class StackManager
     static class CharStackProber extends BaseThread
     {
         public void run()
-        {         
-        	int j =0; 
+        {        
+        	sem1.P();
+          	int j =0; 
         	for(int i = 0; i<6 ;i++){
 	    		System.out.print("STACK S = "); 
+	    		Log.getInstance().log("STACK S = ");
 	        		while(j < stack.getSize()){
-	        			try {
+	        			try {  
 							System.out.print("["+stack.getAt(j)+"]");
-							Log.getInstance().log("STACK S = " + "["+stack.getAt(j)+"]");
+							Log.getInstance().log("["+stack.getAt(j)+"]");
 						} catch (CharStackInvalidAceessException e) {
 							e.printStackTrace();
 						}
 	        			j++;
 	        		}
+	        		Log.getInstance().log("\n");
 	        		System.out.println();
-	        	j=0;
-        	}
-        }
+	        	j=0;  
+
+        	}     
+        	sem1.V();
+       }
     } // class CharStackProber / 
 } // class StackManager

@@ -2,5 +2,7 @@ package CharStackExceptions;
 
 public class CharStackInvalidAceessException extends Exception
 {
-    // Fill it up yourself
+	public CharStackInvalidAceessException(){
+		super ("You don't have access to the stack");
+	}
 }
