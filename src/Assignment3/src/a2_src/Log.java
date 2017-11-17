@@ -1,3 +1,5 @@
+package a2_src;
+
 import java.io.*;
 
 public class Log {
