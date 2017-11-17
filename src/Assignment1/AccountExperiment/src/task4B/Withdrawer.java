@@ -24,7 +24,7 @@ public class Withdrawer extends Thread {
 		// Withdraw 10 CAD into instance variable account
 		for (int i=0;i<10000000;i++)
 		{
-			account.withdraw(10);
+			account.withdraw(20);
 			/*
 			try {
 				sleep(10);

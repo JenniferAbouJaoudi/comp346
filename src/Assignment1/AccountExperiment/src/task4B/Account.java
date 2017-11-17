@@ -174,7 +174,9 @@ public class Account {
 			k = k / 2;
 
 		synchronized(this){
-			balance = balance - amount;
+			if (balance > 0){
+				balance = balance - amount;
+			}
 		}
 
 		// Waste some time doing fake computations
