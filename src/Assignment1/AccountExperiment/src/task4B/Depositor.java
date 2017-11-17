@@ -22,7 +22,7 @@ public class Depositor extends Thread {
 	public void run(){
 		for (int i=0;i<10000000;i++)
 		{
-			account.debosit(20);
+			account.debosit(10);
 		/*			
  		try {
 				sleep(10);
