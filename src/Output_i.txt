@@ -1,0 +1,364 @@
+------------------------------
+
+Producer thread [TID=3] starts executing.
+
+
+Top element of the stack :d
+
+
+Producer thread [TID=3] pushes character =e
+
+
+Top element of the stack :e
+
+
+Producer thread [TID=3] pushes character =f
+
+
+Top element of the stack :f
+
+
+Producer thread [TID=3] pushes character =g
+
+
+Producer thread [TID=3] terminates.
+
+
+Producer thread [TID=4] starts executing.
+
+
+Top element of the stack :g
+
+
+Producer thread [TID=4] pushes character =h
+
+
+Top element of the stack :h
+
+
+Producer thread [TID=4] pushes character =i
+
+
+Top element of the stack :i
+
+
+Producer thread [TID=4] pushes character =j
+
+
+Producer thread [TID=4] terminates.
+
+
+STACK S = 
+[a]
+[b]
+[c]
+[d]
+[e]
+[f]
+[g]
+[h]
+[i]
+[j]
+
+
+STACK S = 
+[a]
+[b]
+[c]
+[d]
+[e]
+[f]
+[g]
+[h]
+[i]
+[j]
+
+
+STACK S = 
+[a]
+[b]
+[c]
+[d]
+[e]
+[f]
+[g]
+[h]
+[i]
+[j]
+
+
+STACK S = 
+[a]
+[b]
+[c]
+[d]
+[e]
+[f]
+[g]
+[h]
+[i]
+[j]
+
+
+STACK S = 
+[a]
+[b]
+[c]
+[d]
+[e]
+[f]
+[g]
+[h]
+[i]
+[j]
+
+
+STACK S = 
+[a]
+[b]
+[c]
+[d]
+[e]
+[f]
+[g]
+[h]
+[i]
+[j]
+
+
+Consumer thread [TID=1] starts executing.
+
+
+
+
+Consumer thread [TID=1] pops character =j
+
+
+Consumer thread [TID=1] terminates.
+
+
+
+
+Consumer thread [TID=1] pops character =i
+
+
+Consumer thread [TID=1] terminates.
+
+
+
+
+Consumer thread [TID=1] pops character =h
+
+
+Consumer thread [TID=1] terminates.
+
+
+Consumer thread [TID=2] starts executing.
+
+
+
+
+Consumer thread [TID=2] pops character =g
+
+
+Consumer thread [TID=2] terminates.
+
+
+
+
+Consumer thread [TID=2] pops character =f
+
+
+Consumer thread [TID=2] terminates.
+
+
+
+
+Consumer thread [TID=2] pops character =e
+
+
+Consumer thread [TID=2] terminates.
+
+
+------------------------------
+
+Producer thread [TID=3] starts executing.
+
+
+Top element of the stack :d
+
+
+Producer thread [TID=3] pushes character =e
+
+
+Top element of the stack :e
+
+
+Producer thread [TID=3] pushes character =f
+
+
+Top element of the stack :f
+
+
+Producer thread [TID=3] pushes character =g
+
+
+Producer thread [TID=3] terminates.
+
+
+Producer thread [TID=4] starts executing.
+
+
+Top element of the stack :g
+
+
+Producer thread [TID=4] pushes character =h
+
+
+Top element of the stack :h
+
+
+Producer thread [TID=4] pushes character =i
+
+
+Top element of the stack :i
+
+
+Producer thread [TID=4] pushes character =j
+
+
+Producer thread [TID=4] terminates.
+
+
+STACK S = 
+[a]
+[b]
+[c]
+[d]
+[e]
+[f]
+[g]
+[h]
+[i]
+[j]
+
+
+STACK S = 
+[a]
+[b]
+[c]
+[d]
+[e]
+[f]
+[g]
+[h]
+[i]
+[j]
+
+
+STACK S = 
+[a]
+[b]
+[c]
+[d]
+[e]
+[f]
+[g]
+[h]
+[i]
+[j]
+
+
+STACK S = 
+[a]
+[b]
+[c]
+[d]
+[e]
+[f]
+[g]
+[h]
+[i]
+[j]
+
+
+STACK S = 
+[a]
+[b]
+[c]
+[d]
+[e]
+[f]
+[g]
+[h]
+[i]
+[j]
+
+
+STACK S = 
+[a]
+[b]
+[c]
+[d]
+[e]
+[f]
+[g]
+[h]
+[i]
+[j]
+
+
+Consumer thread [TID=1] starts executing.
+
+
+
+
+Consumer thread [TID=1] pops character =j
+
+
+Consumer thread [TID=2] starts executing.
+
+
+
+
+Consumer thread [TID=2] pops character =i
+
+
+Consumer thread [TID=1] terminates.
+
+
+Consumer thread [TID=2] terminates.
+
+
+
+
+
+
+Consumer thread [TID=1] pops character =h
+
+
+Consumer thread [TID=2] pops character =g
+
+
+Consumer thread [TID=1] terminates.
+
+
+Consumer thread [TID=2] terminates.
+
+
+
+
+
+
+Consumer thread [TID=1] pops character =f
+Consumer thread [TID=2] pops character =e
+
+
+
+
+Consumer thread [TID=1] terminates.
+Consumer thread [TID=2] terminates.
+
+
+
+

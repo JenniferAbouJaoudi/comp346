@@ -145,7 +145,7 @@ public class BaseThread extends Thread
 		if(siTurn == this.iTID)
 		{
 			// set siTurn = siTurn +/- 1;
-			if(pcIncreasingOrder == true)
+			if(pcIncreasingOrder)
 				siTurn++;
 			else
 				siTurn--;

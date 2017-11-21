@@ -4,17 +4,15 @@
 class Semaphore
 {
 
-    private int value; 
-    private int status;
+    private int value;
     
     public Semaphore() {
-        this.value = 0; 
-        this.status = 0;
+        this.value = 0;
     }
 
     public Semaphore(int value) {
         this.value = value;
-        this.status = 0;
+
     }
 
     public synchronized void Wait(){

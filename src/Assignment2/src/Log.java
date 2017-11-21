@@ -2,7 +2,7 @@ import java.io.*;
 
 public class Log {
     private static Log instance;
-    private final String filename = "a2_src/Output_i.txt";
+    private final String filename = "src/Output_i.txt";
     private Log(){
 
     }
