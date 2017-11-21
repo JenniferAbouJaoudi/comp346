@@ -54,6 +54,9 @@ public class DiningPhilosophers
 			// Space for all the philosophers
 			Philosopher aoPhilosophers[] = new Philosopher[iPhilosophers];
 
+			// let  monitor class know about philosophers
+			soMonitor.setPhilosophers(aoPhilosophers);
+
 			// Let 'em sit down
 			for(int j = 0; j < iPhilosophers; j++)
 			{

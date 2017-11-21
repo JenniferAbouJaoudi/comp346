@@ -74,11 +74,20 @@ public class Philosopher extends BaseThread
 	{
 		for(int i = 0; i < DiningPhilosophers.DINING_STEPS; i++)
 		{
-			DiningPhilosophers.soMonitor.pickUp(getTID());
+			try {
+				DiningPhilosophers.soMonitor.pickUp(getTID());
+				sleep(100);
+			}catch(InterruptedException e){
+				System.out.println(e.toString());
+			}
 
 			eat();
-
-			DiningPhilosophers.soMonitor.putDown(getTID());
+			try {
+				DiningPhilosophers.soMonitor.putDown(getTID());
+				sleep(100);
+			}catch(InterruptedException e){
+				System.out.println(e.toString());
+			}
 
 			think();
 
@@ -87,12 +96,22 @@ public class Philosopher extends BaseThread
 			 * A decision is made at random whether this particular
 			 * philosopher is about to say something terribly useful.
 			*/
-			if(((Math.random() * 10) % 3) == 0) // A random decison
+			if(((long)(Math.random()) % 2) == 0) // A random decison
 			{
 				// Some monitor ops down here...
-				DiningPhilosophers.soMonitor.requestTalk();
+				try {
+					DiningPhilosophers.soMonitor.requestTalk();
+					sleep(100);
+				}catch (InterruptedException e){
+					System.out.println(e.toString());
+				}
 				talk();
-				DiningPhilosophers.soMonitor.endTalk();
+				try {
+					DiningPhilosophers.soMonitor.endTalk();
+					sleep(100);
+				}catch (InterruptedException e){
+					System.out.println(e.toString());
+				}
 				// ...
 			}
 
