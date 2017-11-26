@@ -1,0 +1,5 @@
+In order to handle starvation there exist many methods.
+For this particular snippet of code, it seemed easier to implement
+thread.sleep() after every thread completed an operation. An other
+method which was considered were queues but it would have required
+too much refactoring of the code.
