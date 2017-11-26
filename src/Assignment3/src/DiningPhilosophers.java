@@ -41,12 +41,21 @@ public class DiningPhilosophers
 	{
 		try
 		{
-			/*
-			 * TODO:
-			 * Should be settable from the command line
-			 * or the default if no arguments supplied.
-			 */
 			int iPhilosophers = DEFAULT_NUMBER_OF_PHILOSOPHERS;
+			if (argv.length > 0) {
+				try{
+					iPhilosophers = Integer.parseInt(argv[0]);
+					if (iPhilosophers <= 0){
+						System.out.println("Please enter a positive integer.");
+						System.exit(1);
+					}
+				}catch(Exception e){
+					System.out.println("Please enter a positive integer.");
+					System.exit(1);
+				}
+			}
+
+			System.out.println("Total philosophers: " + iPhilosophers);
 
 			// Make the monitor aware of how many philosophers there are
 			soMonitor = new Monitor(iPhilosophers);
